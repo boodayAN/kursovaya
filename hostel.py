@@ -95,14 +95,24 @@ class HotelReservationApp(tk.Tk):
 
     # Метод для бронирования номера
     def reserve_room(self):
-        # Проверка подтверждения бронирования
-        if messagebox.askyesno("Забронировать номер", "Хотите забронировать номер?"):
-            # Запрос номера телефона
-            phone_number = simpledialog.askstring("Оставьте номер телефона", "Пожалуйста, оставьте ваш номер телефона")
-            # Вывод информации о бронировании
-            messagebox.showinfo("Бронирование номера", f"Спасибо за бронирование. Ваш номер телефона: {phone_number}")
+        total_cost = int(self.total_label.cget("text").split(":")[1].strip().split()[0])
+        if total_cost != 0:
+            # Проверка подтверждения бронирования
+            if messagebox.askyesno("Забронировать номер", "Хотите забронировать номер?"):
+                name = "";
+                while name == "":
+                    name = simpledialog.askstring("Фамилия и Имя клиента:", "Введите имя и фамилию клиента, на которого будет забронирован номер")
+
+             # Запрос номера телефона
+                phone_number = "";
+                while phone_number == "":
+                 phone_number = simpledialog.askstring("Оставьте номер телефона", "Пожалуйста, оставьте ваш номер телефона")
+                # Вывод информации о бронировании
+                messagebox.showinfo("Бронирование номера", f"Спасибо за бронирование, {name}. Ваш номер телефона: {phone_number}")
+            else:
+                messagebox.showinfo("Гостиница", "Будем рады видеть вас в нашей гостинице!")
         else:
-            messagebox.showinfo("Гостиница", "Будем рады видеть вас в нашей гостинице!")
+            messagebox.showinfo("Ошибка", "Сначала заполните данные о номере.")
 
 # Запуск приложения
 if __name__ == "__main__":
