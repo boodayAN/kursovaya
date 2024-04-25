@@ -29,7 +29,8 @@ class HotelReservationApp(tk.Tk):
 
         # Создание интерфейса
         self.create_layout()
-        # Создание расположения элементов на интерфейсе
+
+    # Создание расположения элементов на интерфейсе
     def create_layout(self):
         self.days_label.grid(row=0, column=0, padx=10, pady=5, sticky="w")
         self.days_menu.grid(row=0, column=1, padx=10, pady=5, sticky="w")
@@ -43,7 +44,10 @@ class HotelReservationApp(tk.Tk):
         self.cleaning_label.grid(row=3, column=0, padx=10, pady=5, sticky="w")
         self.cleaning_menu.grid(row=3, column=1, padx=10, pady=5, sticky="w")
 
-        # Метод для вычисления итоговой стоимости
+        self.calculate_button.grid(row=8, column=0, columnspan=2, padx=10, pady=10)
+        self.total_label.grid(row=9, column=0, columnspan=2, padx=10, pady=5)
+
+    # Метод для вычисления итоговой стоимости
     def calculate_total(self):
         # Получение значений параметров бронирования
         days_cost = int(self.days_var.get()) * 1000
@@ -51,11 +55,11 @@ class HotelReservationApp(tk.Tk):
         beds_cost = int(self.beds_var.get()) * 500
         cleaning_cost = {"Нет": 0, "Утро": 500, "Вечер": 500, "Оба": 1000}[self.cleaning_var.get()]
 
-
         # Вычисление итоговой стоимости
         total_cost = days_cost + guests_cost + beds_cost + cleaning_cost
         self.total_label.config(text=f"Итоговая стоимость: {total_cost} рублей")
 
+# Запуск приложения
 if __name__ == "__main__":
     app = HotelReservationApp()
     app.mainloop()
