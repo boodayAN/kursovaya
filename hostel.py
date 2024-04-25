@@ -38,6 +38,7 @@ class HotelReservationApp(tk.Tk):
 
         self.calculate_button = tk.Button(self, text="Подсчитать", command=self.calculate_total)  # Кнопка для подсчета стоимости
         self.total_label = tk.Label(self, text="Итоговая стоимость: 0 рублей")  # Метка для вывода итоговой стоимости
+        self.reserve_button = tk.Button(self, text="Забронировать номер", command=self.reserve_room)  # Кнопка для бронирования номера
 
         # Создание интерфейса
         self.create_layout()
@@ -66,6 +67,7 @@ class HotelReservationApp(tk.Tk):
 
         self.calculate_button.grid(row=8, column=0, columnspan=2, padx=10, pady=10)
         self.total_label.grid(row=9, column=0, columnspan=2, padx=10, pady=5)
+        self.reserve_button.grid(row=10, column=0, columnspan=2, padx=10, pady=10)
 
     # Метод для вычисления итоговой стоимости
     def calculate_total(self):
@@ -90,6 +92,17 @@ class HotelReservationApp(tk.Tk):
         # Вычисление итоговой стоимости
         total_cost = days_cost + guests_cost + beds_cost + cleaning_cost  + meal_cost + smoking_cost
         self.total_label.config(text=f"Итоговая стоимость: {total_cost} рублей")
+
+    # Метод для бронирования номера
+    def reserve_room(self):
+        # Проверка подтверждения бронирования
+        if messagebox.askyesno("Забронировать номер", "Хотите забронировать номер?"):
+            # Запрос номера телефона
+            phone_number = simpledialog.askstring("Оставьте номер телефона", "Пожалуйста, оставьте ваш номер телефона")
+            # Вывод информации о бронировании
+            messagebox.showinfo("Бронирование номера", f"Спасибо за бронирование. Ваш номер телефона: {phone_number}")
+        else:
+            messagebox.showinfo("Гостиница", "Будем рады видеть вас в нашей гостинице!")
 
 # Запуск приложения
 if __name__ == "__main__":
